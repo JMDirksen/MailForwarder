@@ -1,0 +1,10 @@
+services:
+  mailforwarder:
+    image: jmdirksen/mailforwarder
+    ports:
+      - "25:25"
+    environment:
+      FORWARDS: >
+        @example.com myaddress@gmail.com
+        test@other.com myaddress@gmail.com
+    restart: unless-stopped
