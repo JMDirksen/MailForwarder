@@ -1,10 +1,11 @@
 FROM alpine
 RUN apk update && apk add --no-cache postfix
+RUN echo "virtual_alias_maps = lmdb:/etc/postfix/virtual" >> /etc/postfix/main.cf
 COPY --chmod=700 run.sh /
 
 EXPOSE 25
 
-ENV FORWARDS=@example.com\ myaddress@gmail.com\
-             test@other.com\ myaddress@gmail.com
+ENV DOMAINS example.com
+ENV FORWARD1 @example.com myaddress@gmail.com
 
 CMD /run.sh
