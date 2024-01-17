@@ -4,7 +4,7 @@ services:
     ports:
       - "25:25"
     environment:
-      FORWARDS: >
-        @example.com myaddress@gmail.com
-        test@other.com myaddress@gmail.com
+      DOMAINS: "example.com other.com"
+      FORWARD1: "@example.com myaddress@gmail.com"
+      FORWARD2: "test@other.com myaddress@gmail.com"
     restart: unless-stopped
