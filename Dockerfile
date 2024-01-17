@@ -5,6 +5,8 @@ COPY --chmod=700 run.sh /
 
 EXPOSE 25
 
+ENV HOSTNAME mail.example.com
+
 ENV DOMAINS example.com
 ENV FORWARD1 @example.com myaddress@gmail.com
 

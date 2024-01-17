@@ -1,5 +1,6 @@
 #!/bin/sh
-echo 'maillog_file = /dev/stdout' >> /etc/postfix/main.cf
+echo "maillog_file = /dev/stdout" >> /etc/postfix/main.cf
+echo "myhostname = $HOSTNAME" >> /etc/postfix/main.cf
 echo "virtual_alias_domains = $DOMAINS" >> /etc/postfix/main.cf
 echo $FORWARD1 >> /etc/postfix/virtual
 echo $FORWARD2 >> /etc/postfix/virtual

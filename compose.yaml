@@ -4,6 +4,7 @@ services:
     ports:
       - "25:25"
     environment:
+      HOSTNAME: "mail.example.com"
       DOMAINS: "example.com other.com"
       FORWARD1: "@example.com myaddress@gmail.com"
       FORWARD2: "test@other.com myaddress@gmail.com"
