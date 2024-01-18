@@ -1,8 +1,16 @@
 #!/bin/sh
+
+# Reset main.cf
+cp /etc/postfix/main.cf.default /etc/postfix/main.cf
+
+# Configure main.cf
+echo "virtual_alias_maps = lmdb:/etc/postfix/virtual" >> /etc/postfix/main.cf
 echo "maillog_file = /dev/stdout" >> /etc/postfix/main.cf
 echo "myhostname = $HOSTNAME" >> /etc/postfix/main.cf
 echo "virtual_alias_domains = $DOMAINS" >> /etc/postfix/main.cf
-echo $FORWARD1 >> /etc/postfix/virtual
+
+# Configure forwards in virtual
+echo $FORWARD1 > /etc/postfix/virtual
 echo $FORWARD2 >> /etc/postfix/virtual
 echo $FORWARD3 >> /etc/postfix/virtual
 echo $FORWARD4 >> /etc/postfix/virtual
@@ -13,6 +21,8 @@ echo $FORWARD8 >> /etc/postfix/virtual
 echo $FORWARD9 >> /etc/postfix/virtual
 echo $FORWARD10 >> /etc/postfix/virtual
 postmap /etc/postfix/virtual
+
+# Show parameters
 echo "Hostname:   $HOSTNAME"
 echo "Domains:    $DOMAINS"
 echo "Forward  1: $FORWARD1"
@@ -25,4 +35,6 @@ echo "Forward  7: $FORWARD7"
 echo "Forward  8: $FORWARD8"
 echo "Forward  9: $FORWARD9"
 echo "Forward 10: $FORWARD10"
+
+# Run POSTFIX
 postfix -v start-fg

@@ -1,6 +1,6 @@
 FROM alpine
 RUN apk update && apk add --no-cache postfix
-RUN echo "virtual_alias_maps = lmdb:/etc/postfix/virtual" >> /etc/postfix/main.cf
+RUN cp /etc/postfix/main.cf /etc/postfix/main.cf.default
 COPY --chmod=700 run.sh /
 
 EXPOSE 25
