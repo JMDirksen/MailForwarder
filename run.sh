@@ -1,13 +1,16 @@
 #!/bin/sh
 
 # Reset main.cf
-cp /etc/postfix/main.cf.default /etc/postfix/main.cf
+cp /etc/postfix/main.cf.template /etc/postfix/main.cf
 
 # Configure main.cf
-echo "virtual_alias_maps = lmdb:/etc/postfix/virtual" >> /etc/postfix/main.cf
-echo "maillog_file = /dev/stdout" >> /etc/postfix/main.cf
 echo "myhostname = $HOSTNAME" >> /etc/postfix/main.cf
 echo "virtual_alias_domains = $DOMAINS" >> /etc/postfix/main.cf
+
+# Generate TLS certificate
+openssl req -newkey rsa:4096 -nodes -sha512 -x509 -days 3650 -nodes -out cert.pem -keyout key.pem -subj "/C=NL/ST=Noord-Holland/L=Amsterdam/O=Organization/OU=IT/CN=$HOSTNAME/emailAddress=admin@$HOSTNAME"
+cat key.pem cert.pem > /etc/postfix/chain.pem
+chmod go= /etc/postfix/chain.pem
 
 # Configure forwards in virtual
 echo $FORWARD1 > /etc/postfix/virtual

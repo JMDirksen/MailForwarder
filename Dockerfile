@@ -1,6 +1,7 @@
 FROM alpine
-RUN apk update && apk add --no-cache postfix
-RUN cp /etc/postfix/main.cf /etc/postfix/main.cf.default
+RUN apk update && apk add --no-cache postfix openssl
+RUN mv /etc/postfix/main.cf /etc/postfix/main.cf.org
+COPY --chmod=700 main.cf.template /etc/postfix/
 COPY --chmod=700 run.sh /
 
 EXPOSE 25

@@ -1,0 +1,7 @@
+compatibility_level = 3.8
+alias_database = 
+alias_maps = 
+virtual_alias_maps = lmdb:/etc/postfix/virtual
+maillog_file = /dev/stdout
+smtp_tls_security_level = encrypt
+smtp_tls_cert_file = /etc/postfix/chain.pem
