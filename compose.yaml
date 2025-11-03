@@ -1,6 +1,6 @@
 services:
   mailforwarder:
-    image: jmdirksen/mailforwarder
+    build: .
     ports:
       - "25:25"
     environment:
